@@ -49,7 +49,7 @@ public class Searcher {
 		// 遍历hits.scoreDocs，得到scoreDoc:ScoreDoc:得分文档,即得到文档 scoreDocs:代表的是topDocs这个文档数组
 		for (ScoreDoc scoreDoc : hits.scoreDocs) {
 			Document doc = is.doc(scoreDoc.doc);
-			System.out.println(doc.get("fullPath"));
+			System.out.println(doc.get("fileName") + ":" + doc.get("fullPath"));
 		}
 
 		// 关闭reader
