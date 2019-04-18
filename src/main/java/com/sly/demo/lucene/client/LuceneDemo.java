@@ -1,8 +1,14 @@
 package com.sly.demo.lucene.client;
 
+import java.io.IOException;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.junit.Test;
 
+import com.sly.demo.lucene.ik.IKAnalyzerLucene7;
 import com.sly.demo.lucene.index.Indexer;
 import com.sly.demo.lucene.search.Searcher;
 
@@ -59,11 +65,33 @@ public class LuceneDemo {
 	public void searchTest() {
 		String indexDir = "D:/test/lucene/dataindex";
         //我们要搜索的内容
-        String q = "www.deskClient.com";
+        String q = "后得到的";
         try {
         	Searcher.search(indexDir, q);
         } catch (Exception e) {
         	ExceptionUtils.getStackTrace(e);
         }
 	}
+	
+	/**
+	 * 测试分词器
+	 * @throws IOException
+	 * @author sly
+	 * @time 2019年4月18日
+	 */
+	@Test
+	public void analyzerTest() throws IOException {
+		Analyzer analyzer = new IKAnalyzerLucene7(true);
+		//Analyzer analyzer = new StandardAnalyzer();
+
+		TokenStream tokenStream = analyzer.tokenStream("content", "后得到的");
+		tokenStream.reset();
+		CharTermAttribute charTermAttribute = tokenStream.getAttribute(CharTermAttribute.class);
+		while (tokenStream.incrementToken()) {
+			System.out.println(charTermAttribute.toString());
+		}
+		analyzer.close();
+	}
+	
+	
 }

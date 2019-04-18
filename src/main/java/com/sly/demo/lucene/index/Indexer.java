@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
@@ -14,6 +12,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+
+import com.sly.demo.lucene.ik.IKAnalyzerLucene7;
 
 /**
  * 索引文件
@@ -35,8 +35,9 @@ public class Indexer {
 	public Indexer(String indexDir) throws IOException {
 		// 得到索引所在目录的路径
 		Directory directory = FSDirectory.open(Paths.get(indexDir));
-		// 标准分词器
-		Analyzer analyzer = new StandardAnalyzer();
+		// ik分词器
+		IKAnalyzerLucene7 analyzer = new IKAnalyzerLucene7();
+		//Analyzer analyzer = new IKAnalyzer();
 		// 保存用于创建IndexWriter的所有配置。
 		IndexWriterConfig iwConfig = new IndexWriterConfig(analyzer);
 		// 实例化IndexWriter

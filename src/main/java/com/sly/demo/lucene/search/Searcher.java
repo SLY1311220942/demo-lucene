@@ -2,8 +2,6 @@ package com.sly.demo.lucene.search;
 
 import java.nio.file.Paths;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -14,6 +12,8 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+
+import com.sly.demo.lucene.ik.IKAnalyzerLucene7;
 
 /**
  * 查询文件
@@ -31,7 +31,9 @@ public class Searcher {
 		// 建立索引查询器
 		IndexSearcher is = new IndexSearcher(reader);
 		// 实例化分析器
-		Analyzer analyzer = new StandardAnalyzer();
+		IKAnalyzerLucene7 analyzer = new IKAnalyzerLucene7();
+		//Analyzer analyzer = new IKAnalyzer(true);
+		// Analyzer analyzer = new StandardAnalyzer();
 		// 建立查询解析器:第一个参数是要查询的字段;第二个参数是分析器Analyzer
 		QueryParser parser = new QueryParser("contents", analyzer);
 		// 根据传进来的p查找
