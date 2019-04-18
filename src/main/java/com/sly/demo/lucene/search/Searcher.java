@@ -32,7 +32,7 @@ public class Searcher {
 		IndexSearcher is = new IndexSearcher(reader);
 		// 实例化分析器
 		IKAnalyzerLucene7 analyzer = new IKAnalyzerLucene7();
-		//Analyzer analyzer = new IKAnalyzer(true);
+		// Analyzer analyzer = new IKAnalyzer(true);
 		// Analyzer analyzer = new StandardAnalyzer();
 		// 建立查询解析器:第一个参数是要查询的字段;第二个参数是分析器Analyzer
 		QueryParser parser = new QueryParser("contents", analyzer);

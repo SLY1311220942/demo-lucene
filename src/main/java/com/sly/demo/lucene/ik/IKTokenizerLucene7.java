@@ -10,8 +10,8 @@ import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
 
 /**
- * 重写的分词器
- * 这个类必须加final,不然会报错
+ * 重写的分词器 这个类必须加final,不然会报错
+ * 
  * @author sly
  * @time 2019年4月18日
  */

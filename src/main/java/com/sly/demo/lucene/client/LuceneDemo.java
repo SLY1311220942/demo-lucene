@@ -19,9 +19,10 @@ import com.sly.demo.lucene.search.Searcher;
  * @time 2019年4月18日
  */
 public class LuceneDemo {
-	
+
 	/**
 	 * 测试索引
+	 * 
 	 * @author sly
 	 * @time 2019年4月18日
 	 */
@@ -49,32 +50,34 @@ public class LuceneDemo {
 				}
 			}
 		}
-		
+
 		// 索引结束时间
 		long end = System.currentTimeMillis();
 		System.out.println("索引：" + numIndexed + " 个文件 花费了" + (end - start) + " 毫秒");
 
 	}
-	
+
 	/**
 	 * 测试查询
+	 * 
 	 * @author sly
 	 * @time 2019年4月18日
 	 */
 	@Test
 	public void searchTest() {
 		String indexDir = "D:/test/lucene/dataindex";
-        //我们要搜索的内容
-        String q = "后得到的";
-        try {
-        	Searcher.search(indexDir, q);
-        } catch (Exception e) {
-        	ExceptionUtils.getStackTrace(e);
-        }
+		// 我们要搜索的内容
+		String q = "后得到的";
+		try {
+			Searcher.search(indexDir, q);
+		} catch (Exception e) {
+			ExceptionUtils.getStackTrace(e);
+		}
 	}
-	
+
 	/**
 	 * 测试分词器
+	 * 
 	 * @throws IOException
 	 * @author sly
 	 * @time 2019年4月18日
@@ -82,7 +85,7 @@ public class LuceneDemo {
 	@Test
 	public void analyzerTest() throws IOException {
 		Analyzer analyzer = new IKAnalyzerLucene7(true);
-		//Analyzer analyzer = new StandardAnalyzer();
+		// Analyzer analyzer = new StandardAnalyzer();
 
 		TokenStream tokenStream = analyzer.tokenStream("content", "后得到的");
 		tokenStream.reset();
@@ -92,6 +95,5 @@ public class LuceneDemo {
 		}
 		analyzer.close();
 	}
-	
-	
+
 }
